@@ -1,6 +1,6 @@
 package com.orderservice.model;
 
-public class Order {
+public class OrderDto {
 
     private String id;
     private String name;
