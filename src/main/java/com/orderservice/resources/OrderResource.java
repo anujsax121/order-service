@@ -1,6 +1,6 @@
 package com.orderservice.resources;
 
-import com.orderservice.resources.model.Order;
+import com.orderservice.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

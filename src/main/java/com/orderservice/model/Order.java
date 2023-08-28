@@ -1,4 +1,4 @@
-package com.orderservice.resources.model;
+package com.orderservice.model;
 
 public class Order {
 
