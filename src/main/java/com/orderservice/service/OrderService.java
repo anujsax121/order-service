@@ -1,10 +1,10 @@
 package com.orderservice.service;
 
 import com.orderservice.entity.Order;
+import com.orderservice.exception.ResourceNotFound;
 import com.orderservice.model.OrderDto;
 import com.orderservice.repository.OrderRepository;
 import com.orderservice.utils.MapperUtils;
-import org.apache.kafka.common.errors.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -31,10 +31,11 @@ public class OrderService {
         log.info("send order event {}", orderDto.getId());
         return null;
     }
+
     public OrderDto get(String id) {
         log.info("fetching  order {}", id);
         Order order = orderRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
+                .orElseThrow(() -> new ResourceNotFound("Resource not found"));
         log.info("fetched  order {}", id);
         return mapperUtils.convertToDTO(order);
     }
