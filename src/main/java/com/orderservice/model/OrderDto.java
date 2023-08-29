@@ -16,8 +16,6 @@ public class OrderDto {
 
     private String status;
 
-
-
     public String getId() {
         return id;
     }

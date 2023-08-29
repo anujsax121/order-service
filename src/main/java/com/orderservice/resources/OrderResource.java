@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("api/v1/order")
 public class OrderResource {
@@ -20,6 +22,7 @@ public class OrderResource {
     @PostMapping
     public ResponseEntity created(@RequestBody OrderDto orderDto) {
         log.info("creating order {}",orderDto);
+        orderDto.setId(UUID.randomUUID().toString());
         orderService.created(orderDto);
         log.info("created order {}",orderDto.getId());
         return new ResponseEntity(HttpStatus.CREATED);

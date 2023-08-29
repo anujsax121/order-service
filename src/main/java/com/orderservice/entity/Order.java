@@ -1,20 +1,22 @@
 package com.orderservice.entity;
 
-import jakarta.persistence.Column;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity(name = "order")
 public class Order {
     @Id
     private String id;
+
     private String name;
-    @Column
+
     private int quantity;
-    @Column
+
     private double amount;
-    @Column
+
     private String status;
 
     public String getName() {
