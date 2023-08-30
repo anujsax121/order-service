@@ -10,9 +10,12 @@ import org.springframework.stereotype.Component;
 public class MapperUtils {
     @Autowired
     private ModelMapper modelMapper;
-    public Order convertToDao(OrderDto orderDto) { return modelMapper.map(orderDto, Order.class); }
+
+    public Order convertToDao(OrderDto orderDto) {
+        return modelMapper.map(orderDto, Order.class);
+    }
+
     public OrderDto convertToDTO(Order order) {
         return modelMapper.map(order, OrderDto.class);
     }
-
 }

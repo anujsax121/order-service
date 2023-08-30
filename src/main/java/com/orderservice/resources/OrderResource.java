@@ -2,6 +2,7 @@ package com.orderservice.resources;
 
 import com.orderservice.model.OrderDto;
 import com.orderservice.service.OrderService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +15,16 @@ import java.util.UUID;
 @RestController
 @RequestMapping("api/v1/order")
 public class OrderResource {
-
     private final Logger log = LoggerFactory.getLogger(OrderResource.class);
     @Autowired
     private OrderService orderService;
 
     @PostMapping
-    public ResponseEntity created(@RequestBody OrderDto orderDto) {
-        log.info("creating order {}",orderDto);
+    public ResponseEntity created(@RequestBody @Valid OrderDto orderDto) {
+        log.info("creating order {}", orderDto);
         orderDto.setId(UUID.randomUUID().toString());
         orderService.created(orderDto);
-        log.info("created order {}",orderDto.getId());
+        log.info("created order {}", orderDto.getId());
         return new ResponseEntity(HttpStatus.CREATED);
     }
 

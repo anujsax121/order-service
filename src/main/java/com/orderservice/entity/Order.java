@@ -1,9 +1,8 @@
 package com.orderservice.entity;
 
 
+import com.orderservice.model.Status;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity(name = "order")
@@ -17,7 +16,7 @@ public class Order {
 
     private double amount;
 
-    private String status;
+    private Status status;
 
     public String getName() {
         return name;
@@ -51,11 +50,11 @@ public class Order {
         this.quantity = quantity;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

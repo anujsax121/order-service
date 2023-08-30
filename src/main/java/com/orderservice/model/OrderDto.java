@@ -1,20 +1,17 @@
 package com.orderservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 public class OrderDto {
-
     private String id;
-
     @NotBlank(message = "name should not empty")
     private String name;
-
-
     private int quantity;
-
     private double amount;
 
-    private String status;
+    private Status status;
 
     public String getId() {
         return id;
@@ -40,14 +37,6 @@ public class OrderDto {
         this.amount = amount;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -55,4 +44,6 @@ public class OrderDto {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+    public Status getStatus() { return status; }
+    public void setStatus(Status status) { this.status = status; }
 }
