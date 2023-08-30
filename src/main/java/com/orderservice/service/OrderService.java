@@ -9,9 +9,7 @@ import com.orderservice.repository.OrderRepository;
 import com.orderservice.utils.MapperUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
-
 import java.util.UUID;
 
 @Service
@@ -28,7 +26,6 @@ public class OrderService {
         this.orderRepository = orderRepository;
         this.mapperUtils = mapperUtils;
     }
-
     public OrderDto created(OrderDto orderDto) {
         Order order = mapperUtils.convertToDao(orderDto);
         order.setId(UUID.randomUUID().toString());
