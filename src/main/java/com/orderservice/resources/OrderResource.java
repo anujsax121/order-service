@@ -20,12 +20,12 @@ public class OrderResource {
     private OrderService orderService;
 
     @PostMapping
-    public ResponseEntity created(@RequestBody @Valid OrderDto orderDto) {
+    public ResponseEntity<OrderDto> created(@RequestBody @Valid OrderDto orderDto) {
         log.info("creating order {}", orderDto);
         orderDto.setId(UUID.randomUUID().toString());
-        orderService.created(orderDto);
+        orderDto = orderService.created(orderDto);
         log.info("created order {}", orderDto.getId());
-        return new ResponseEntity(HttpStatus.CREATED);
+        return new ResponseEntity<OrderDto>(orderDto, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

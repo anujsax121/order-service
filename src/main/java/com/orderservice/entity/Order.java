@@ -1,7 +1,6 @@
 package com.orderservice.entity;
 
 
-import com.orderservice.model.Status;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -16,7 +15,7 @@ public class Order {
 
     private double amount;
 
-    private Status status;
+    private String status;
 
     public String getName() {
         return name;
@@ -50,11 +49,11 @@ public class Order {
         this.quantity = quantity;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

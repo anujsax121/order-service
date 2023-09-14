@@ -1,14 +1,12 @@
 package com.orderservice.event;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.orderservice.model.OrderDto;
-import com.orderservice.model.Status;
 import com.orderservice.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RestController;
 
-@Component
+@RestController
 public class ReverseOrder {
     @Autowired
     private OrderRepository repository;
@@ -17,16 +15,32 @@ public class ReverseOrder {
     public void reverseOrder(String event) {
 
         try {
-            OrderDto orderDto = new ObjectMapper().readValue(event, OrderDto.class);
-            this.repository.findById(orderDto.getId()).ifPresent(o -> {
-                o.setStatus(Status.FAILED);
+            OrderEventDto orderEventDto = new ObjectMapper().readValue(event, OrderEventDto.class);
+            this.repository.findById(orderEventDto.getOrderEvent().getId()).ifPresent(o -> {
+                o.setStatus(orderEventDto.getStatus());
                 this.repository.save(o);
             });
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
+    @KafkaListener(topics = "order-placed", groupId = "orders-group")
+    public void placedOrder(String event) {
+
+        try {
+            OrderEventDto orderEventDto = new ObjectMapper().readValue(event, OrderEventDto.class);
+            this.repository.findById(orderEventDto.getOrderEvent().getId()).ifPresent(o -> {
+                o.setStatus(orderEventDto.getOrderEvent().getStatus());
+                this.repository.save(o);
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }
